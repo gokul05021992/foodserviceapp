@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FoodService } from '../services/food.service';
+import { AppService } from '../services/food.service';
 
 @Component({
   selector: 'app-food-order',
@@ -14,7 +14,7 @@ export class FoodOrderComponent implements OnInit {
   orderId: number | null = null;
   foodDetails: any;
 
-  constructor(private route: ActivatedRoute, private foodService: FoodService) {}
+  constructor(private route: ActivatedRoute, private foodService: AppService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

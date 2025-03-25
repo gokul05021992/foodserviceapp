@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
+import { AppService } from '../../services/food.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,7 +15,7 @@ export class LoginComponent {
   isOtpSent = false;
   generatedOtp: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private otpService: AppService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       otp: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(6)]]
@@ -23,19 +23,29 @@ export class LoginComponent {
   }
 
   sendOtp() {
-    if (this.loginForm.get('email')?.valid) {
-      this.isOtpSent = true;
-      this.generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
-      alert(`OTP Sent: ${this.generatedOtp}`); // Simulate OTP sending
-    }
+    const email = this.loginForm.get('email')?.value;
+    this.otpService.sendOtp(email).subscribe(
+      response => {
+        alert('OTP sent successfully!');
+        this.isOtpSent = true;
+      },
+      error => {
+        alert('Error sending OTP');
+      }
+    );
   }
 
   login() {
-    if (this.loginForm.value.otp === this.generatedOtp) {
-      localStorage.setItem('isLoggedIn', 'true'); // Store login state
-      this.router.navigate(['/user']); // Navigate to user dashboard
-    } else {
-      alert('Invalid OTP. Please try again.');
-    }
+    const email = this.loginForm.get('email')?.value;
+    const otp = this.loginForm.get('otp')?.value;
+    this.otpService.verifyOtp(email, otp).subscribe(
+      response => {
+        alert('Login successful!');
+        this.router.navigate(['/']);
+      },
+      error => {
+        alert('Invalid OTP');
+      }
+    );
   }
 }

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule,NavigationEnd } from '@angular/router'; // Import RouterModule
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app/app.component';
-import { FoodService } from '../services/food.service';
-
+import { AppService } from '../services/food.service';
 import { filter } from 'rxjs';
 
 
@@ -18,7 +17,7 @@ export class LayoutComponent {
 foodItems: any[] = [];
 
 
-  constructor(private foodService: FoodService, private router: Router) {}
+  constructor(private foodService: AppService, private router: Router) {}
 
   ngOnInit() {
     this.foodService.getAvailableFoods().subscribe({

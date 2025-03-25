@@ -159,3 +159,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 1
 # TOKEN_TTL_MINTS = 5
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"  # Use your email provider's SMTP host
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  # Enables STARTTLS encryption
+EMAIL_USE_SSL = False 
+# EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "pyappdeveloper@gmail.com"
+EMAIL_HOST_PASSWORD = "rphb aswn mawq hfna" 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from '../services/food.service';
+import { AppService } from '../services/food.service';
 import { Router, RouterModule } from '@angular/router'; // Import RouterModule
 
 // import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   foodItems: any[] = [];
 
-  constructor(private foodService: FoodService, private router: Router) {}
+  constructor(private foodService: AppService, private router: Router) {}
 
   ngOnInit() {
     this.foodService.getAvailableFoods().subscribe({
