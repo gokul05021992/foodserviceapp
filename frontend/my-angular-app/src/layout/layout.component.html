@@ -1,0 +1,31 @@
+<header class="navbar">
+    <h1 class="logo">My Food App</h1>
+    <nav class="nav-links">
+      <a routerLink="/" class="nav-item">Home</a>
+      <a routerLink="/admin/dashboard" class="nav-item admin-btn">Admin</a>
+      <a routerLink="/login" class="nav-item login-btn">Login</a>
+    </nav>
+  </header>
+  
+  <!-- Food List -->
+  <div class="food-container">
+    <ul class="food-list">
+      <li *ngFor="let food of foodItems" class="food-item">
+        <a [routerLink]="['/order', food.id]">
+          <img [src]="food.image_url" alt="{{ food.name }}" class="food-image">
+        </a>
+        <div class="food-details">
+          <span class="food-name">{{ food.name }}</span>
+          <span class="food-price">₹{{ food.price }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Dynamic Content -->
+  <router-outlet></router-outlet>
+  
+  <footer class="footer">
+    <p>&copy; 2025 My Food App</p>
+  </footer>
+  

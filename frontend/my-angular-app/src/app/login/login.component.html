@@ -1,0 +1,27 @@
+<div class="login-container">
+  <form [formGroup]="loginForm" class="login-form">
+    <h2>Login</h2>
+
+    <!-- Email Field with Send OTP Button -->
+    <div class="input-group">
+      <label for="email">Email:</label>
+      <div class="input-wrapper">
+        <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+        <button type="button" (click)="sendOtp()" [disabled]="loginForm.get('email')?.invalid" class="btn send-otp">
+          Send OTP
+        </button>
+      </div>
+    </div>
+
+    <!-- OTP Field with Login Button -->
+    <div *ngIf="isOtpSent" class="input-group">
+      <label for="otp">OTP:</label>
+      <div class="input-wrapper">
+        <input type="text" id="otp" formControlName="otp" placeholder="Enter OTP">
+        <button type="button" (click)="login()" [disabled]="loginForm.get('otp')?.invalid" class="btn login-btn">
+          Login
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+<div *ngIf="foodDetails">
+    <h2>Food Details</h2>
+    <p>Food Name: {{ foodDetails.name }}</p>
+    <p>Price: ₹{{ foodDetails.price }}</p>
+    <img [src]="foodDetails.image_url" alt="{{ foodDetails.name }}" />
+  </div>
+  
+  <div *ngIf="!foodDetails && orderId">
+    <p>Loading food details...</p>
+  </div>
+  
+  <div *ngIf="!orderId">
+    <p>Invalid food ID.</p>
+  </div>
