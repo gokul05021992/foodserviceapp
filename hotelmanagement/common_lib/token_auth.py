@@ -39,3 +39,4 @@ class ExpiringTokenAuthentication(TokenAuthentication):
         token.created = datetime.datetime.now()
         token.save()
         return token.user, token
+

@@ -153,6 +153,24 @@ CORS_ALLOWED_ORIGINS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+LOGGING = {
+    "version": 1,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "email_errors.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -166,5 +184,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Enables STARTTLS encryption
 EMAIL_USE_SSL = False 
 # EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "pyappdeveloper@gmail.com"
-EMAIL_HOST_PASSWORD = "rphb aswn mawq hfna" 
+EMAIL_HOST_USER = "malaboopathy1975@gmail.com"
+EMAIL_HOST_PASSWORD = "vlss iqtk lyml euvr" 
+DEFAULT_FROM_EMAIL = "malaboopathy1975@gmail.com"
+
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"  # Use Redis as broker
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
