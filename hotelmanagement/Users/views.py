@@ -37,7 +37,7 @@ def verify_otp(request):
 
             # Generate or update token
             token, created = Token.objects.get_or_create(user=user)
-
+            login(request, user) 
             # Set token expiry time
             token.created = datetime.datetime.now()
             token.save()
@@ -69,7 +69,7 @@ def send_otp(request):
         cache.set(email, otp, timeout=300)  # Store OTP for 5 minutes
 
         try:
-            send_otp_email(email, otp)
+            send_otp_email.delay(email, otp)
             end_time = time.time()  # End time after sending email
             total_time = end_time - start_time  # Calculate time taken
             request_count = cache.get("otp_request_count", 0) + 1

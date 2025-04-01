@@ -22,7 +22,7 @@ foodItems: any[] = [];
   ngOnInit() {
     this.foodService.getAvailableFoods().subscribe({
       next: (data) => {
-        this.foodItems = data;
+        this.foodItems = data.foods;
       },
       error: (error) => {
         console.error('Error fetching food items:', error);

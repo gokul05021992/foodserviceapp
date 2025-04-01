@@ -3,28 +3,38 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
 import time  
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from .models import Food  # Import your Food model
 from .serializers import FoodSerializer  # Import serializer
 
 class AvailableFood(APIView):
     
     def get(self, request):
-        start_time = time.time() 
         foods = Food.objects.all()  # Fetch all food items
         serializer = FoodSerializer(foods, many=True,context={'request': request})  # Serialize data
-        total_foods = foods.count()
-        execution_time = time.time() - start_time
-        return Response(serializer.data, status=status.HTTP_200_OK)
-        # return Response(
-        #     {
-        #         # "total_foods": total_foods,
-        #         "foods": serializer.data,
-        #         # "execution_time": f"{execution_time:.6f} seconds"
-        #     }, 
-        #     status=status.HTTP_200_OK
-        # )
+        logged_in_user = request.user.email if request.user.is_authenticated else None
+        response_data = {
+            "logged_in_user": logged_in_user,
+            "foods": serializer.data  # Serialized food data
+        }       
+        return Response(response_data, status=status.HTTP_200_OK)
 
+class userFood(APIView):
+    authentication_classes = [TokenAuthentication]  # Ensure Token Authentication is used
+    permission_classes = [IsAuthenticated]  # Ensure the user is logged in
 
+    def get(self, request):
+        foods = Food.objects.all()
+        serializer = FoodSerializer(foods, many=True, context={'request': request})
+        logged_in_user = request.user.email  # Now `request.user` will be properly populated
+
+        response_data = {
+            "logged_in_user": logged_in_user,
+            "foods": serializer.data
+        }
+        
+        return Response(response_data, status=status.HTTP_200_OK)
 class RevenueAPIView(APIView):
     def get(self, request):
         # Get filter type from query parameters (default to 'daily')

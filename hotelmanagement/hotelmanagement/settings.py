@@ -184,9 +184,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Enables STARTTLS encryption
 EMAIL_USE_SSL = False 
 # EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "malaboopathy1975@gmail.com"
-EMAIL_HOST_PASSWORD = "vlss iqtk lyml euvr" 
-DEFAULT_FROM_EMAIL = "malaboopathy1975@gmail.com"
+EMAIL_HOST_USER = "gokulpython123@gmail.com"
+EMAIL_HOST_PASSWORD = "nyun naun bmbz meao" 
+DEFAULT_FROM_EMAIL = "gokulpython123@gmail.com"
 
 
 CELERY_BROKER_URL = "redis://localhost:6379/0"  # Use Redis as broker
